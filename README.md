@@ -1,8 +1,10 @@
 # 创建nft命令
 ```bash
-cd /root/nft-manager/scripts/nft_create
-python3 nft_create.py /root/nft-manager/nft_template/ 1 0x111
+python3 /root/nft-manager/scripts/nft_create.py /root/nft-manager/nft_template/ 1 0x111
 ```
+
+python.exe D:\code\nft-manager\scripts\nft_create.py "D:\code\nft-manager\nft_template" "2" "FLsHqcBH5cCdNcavz1Z1onfnYHkMUaBSTzgLwpMt51Df"
+
 
 
 

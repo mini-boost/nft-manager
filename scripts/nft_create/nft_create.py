@@ -55,6 +55,7 @@ if __name__ == '__main__':
 
     # 解析命令行参数
     args = parser.parse_args()
+    print(args)
 
     # 调用创建 NFT 的函数
     create_nft_by_season_template(args.nft_template_dir, args.season_id, args.nft_id)

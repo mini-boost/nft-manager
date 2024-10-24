@@ -3,6 +3,10 @@ import os
 import shutil
 import random
 from constants import TARGET_BASE_DIR
+from wand.image import Image
+
+
+
 
 
 def create_nft_by_season_template(nft_template_dir, season_id, nft_id):
@@ -34,15 +38,32 @@ def create_nft_by_season_template(nft_template_dir, season_id, nft_id):
     # 目标文件路径
     target_file_path = os.path.join(target_dir, f'nft_{nft_id}.jpeg')
 
-    # 拷贝文件
-    shutil.copy(source_file_path, target_file_path)
-    print(f"拷贝文件 {selected_file} 到 {target_file_path}")
+    # 拷贝并压缩文件
+    compress_image(source_file_path, target_file_path)
+    print(f"拷贝并压缩文件 {selected_file} 到 {target_file_path}")
 
     # 重命名源文件
 #     new_file_name = selected_file.replace('.jpeg', '_used.jpeg')  # 假设文件是 .jpeg 格式
 #     new_file_path = os.path.join(nft_template_dir, new_file_name)
 #     os.rename(source_file_path, new_file_path)
 #     print(f"重命名文件 {selected_file} 为 {new_file_name}")
+
+
+
+def compress_image(source_path, target_path, max_size=150 * 1024):  # 最大 150KB
+    """
+    压缩图片到指定大小
+    :param source_path: 原图路径
+    :param target_path: 目标路径
+    :param max_size: 最大文件大小(单位为字节)
+    """
+    with Image(filename=source_path) as img:
+        while True:
+            img.save(filename=target_path)
+            file_size = os.path.getsize(target_path)
+            if file_size <= max_size:
+                break
+            img.compression_quality -= 5
 
 
 # test
